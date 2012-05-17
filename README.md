@@ -2,10 +2,16 @@
 
 (Re)move ~/.vim and ~/.vimrc if you have them already, and run:
 
-    git clone git@github.com:pivotal/vim-config.git ~/.vim
+    # clone this repo
+    git clone git@github.com:dlikhten/vim-config.git ~/.vim
     cd ~/.vim
     git submodule update --init
     ln -s ~/.vim/vimrc ~/.vimrc
+    # compile command-t
+    cd bundle/command-t/
+    ruby extconf.rb
+    make
+
 
 # Updating
 
