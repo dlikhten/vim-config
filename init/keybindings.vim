@@ -5,10 +5,20 @@ let mapleader = ","
 let maplocalleader = ";"
 
 " kj - The intuitive way to get out of insert mode
-imap kj         <Esc>
+" imap kj         <Esc>
 
 " Make Y consistent with D and C
 map Y           y$
+
+" Using Command + the Y/D/P motions will result in them executed on the system
+" clipboard.
+map <D-y>       "+y
+map <D-Y>       "+Y
+map <D-c>       "+c
+map <D-C>       "+C
+map <D-D>       "+D
+map <D-p>       "+p
+map <D-P>       "+P
 
 " Search
 nmap <leader>s  :%s/
@@ -28,7 +38,11 @@ nmap <C-h>      <C-w>h
 nmap <C-l>      <C-w>l
 
 " Open .vimrc file in new tab. Think Command + , [Preferences...] but with Shift.
+" The only quirk is you must press something after it otherwise it will wait
+" for the next key.
 map <D-<>       :tabedit ~/.vimrc<CR>
+" Open keybindings.vim in a new tab.
+map <D-<>k      :tabedit ~/.vim/init/keybindings.vim<CR>
 
 " Reload .vimrc
 map <leader>rv  :source ~/.vimrc<CR>
@@ -42,7 +56,7 @@ nmap <leader>=  gg=G``
 map <silent> <F7> gg=G``:echo "Reformatted."<CR>
 
 " Jump to a new line in insert mode
-imap <D-CR>     <Esc>o
+imap <D-CR>  <Esc>o
 
 " Fast scrolling
 nnoremap <C-e>  3<C-e>
@@ -67,27 +81,36 @@ vmap <tab> >gv
 vmap <s-tab> <gv
 
 " FuzzyFinder and switchback commands
-map <leader>e   :e#<CR>
-map <leader>b   :FufBuffer<CR>
-map <leader>f   <Plug>PeepOpen
-map <leader><C-N> :FufFile **/<CR>
-map <D-e> :FufBuffer<CR>
-map <leader>n :FufFile **/<CR>
-map <D-N> :FufFile **/<CR>
+map <silent> <leader>b   :FufBuffer<CR>
 
 " refresh the FuzzyFinder cache
 map <leader>rf :FufRenewCache<CR>
 
 " Command-T
 map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-map <leader>f   :CommandTFlush<CR>:CommandT<CR>
+" map <leader>ff  :CommandTFlush<CR>:CommandT<CR>
+" Command-T for rails specific stuff
+" map <leader>fv  :CommandTFlush<CR>:CommandT app/views/<CR>
+" map <leader>fm  :CommandTFlush<CR>:CommandT app/models/<CR>
+" map <leader>fc  :CommandTFlush<CR>:CommandT app/controllers/<CR>
+" map <leader>fh  :CommandTFlush<CR>:CommandT app/helpers/<CR>
+" map <leader>fa  :CommandTFlush<CR>:CommandT app/assets/<CR>
+" map <leader>fl  :CommandTFlush<CR>:CommandT lib/<CR>
+" map <leader>fss  :CommandTFlush<CR>:CommandT spec/<CR>
+" map <leader>fsv  :CommandTFlush<CR>:CommandT spec/views/<CR>
+" map <leader>fsm  :CommandTFlush<CR>:CommandT spec/models/<CR>
+" map <leader>fsc  :CommandTFlush<CR>:CommandT spec/controllers/<CR>
+" map <leader>fsh  :CommandTFlush<CR>:CommandT spec/helpers/<CR>
+" map <leader>fsj  :CommandTFlush<CR>:CommandT spec/javascript/<CR>
+" map <leader>fsa  :CommandTFlush<CR>:CommandT spec/acceptance/<CR>
+" map <leader>fsl  :CommandTFlush<CR>:CommandT spec/lib/<CR>
 
 " ctags with rails load path
 map <leader>rt  :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
 map <leader>T   :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
 
 " Git blame
-map <leader>g   :Gblame<CR>
+map <leader><F1>   :Gblame<CR>
 
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
@@ -102,6 +125,7 @@ map <silent> <D-C> :let @* = expand("%")<CR>:echo "Copied: ".expand("%")<CR>
 map <leader>C :let @* = expand("%").":".line(".")<CR>:echo "Copied: ".expand("%").":".line(".")<CR>
 
 " Disable middle mouse button, F1
+" F1 has a very high chance of being hit instead of escape!
 map <MiddleMouse>   <Nop>
 imap <MiddleMouse>  <Nop>
 map <F1>            <Nop>
@@ -118,5 +142,218 @@ vmap <leader>a :call AckVisual()<CR>
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
 
-" Gundo.vim
+" Gundo.vim, think of it as leader-undo
 map <leader>u :GundoToggle<CR>
+
+" Fix the smart ticks/quotes
+" basically, good ol' outlook/word/whever editor you use decide to insert
+" smart ticks and quotes. They are quite bad. If you want to use smart
+" quotes, please use html entities and characters supported by the fonts.
+map <leader>'   :%s/[ʼ’‘]/'/g<CR>:%s/[“”]/"/g<CR>
+
+" Disable search highlight on <CR>
+map <CR>      :nohlsearch<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OPEN FILES IN DIRECTORY OF CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+" map <leader>e :edit %%
+" map <leader>v :view %%
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>gr :topleft :split config/routes.rb<cr>
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gv :CommandTFlush<cr>:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>:CommandT app/models<cr>
+map <leader>gh :CommandTFlush<cr>:CommandT app/helpers<cr>
+map <leader>gl :CommandTFlush<cr>:CommandT lib<cr>
+map <leader>gj :CommandTFlush<cr>:CommandT app/assets/javascripts<cr>
+map <leader>gs :CommandTFlush<cr>:CommandT app/assets/stylesheets<cr>
+map <leader>gg :topleft 100 :split Gemfile<cr>
+map <leader>gt :CommandTFlush<cr>:CommandTTag<cr>
+map <leader>f :CommandTFlush<cr>:CommandT<cr>
+map <leader>F :CommandTFlush<cr>:CommandT %%<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SWITCH BETWEEN TEST AND PRODUCTION CODE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  let in_spec = match(current_file, '^spec/') != -1
+  let going_to_spec = !in_spec
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1 || match(current_file, '\<javascripts\>') != -1
+  if going_to_spec
+    if in_app
+      let new_file = substitute(new_file, 'app/', '', '')
+      let new_file = substitute(new_file, 'assets/', '', '')
+    end
+    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+    let new_file = substitute(new_file, '\.js$', '_spec.js', '')
+    let new_file = substitute(new_file, '\.html\.haml$', '.html.haml_spec.rb', '')
+    let new_file = 'spec/' . new_file
+  else
+    let new_file = substitute(new_file, '\.html\.haml_spec\.rb$', '.html.haml', '')
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '_spec\.js$', '.js', '')
+    let new_file = substitute(new_file, '^spec/', '', '')
+    if in_app
+      let new_file = 'app/' . new_file
+      let new_file = substitute(new_file, 'javascripts/', 'assets/javascripts/', '')
+    end
+  endif
+  return new_file
+endfunction
+nnoremap <leader>. :call OpenTestAlternate()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :call RunTestFile()<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunTests('')<cr>
+map <leader>c :w\|:!script/features<cr>
+map <leader>w :w\|:!script/features --profile wip<cr>
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    if in_test_file
+        call SetTestFile()
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number . " -b")
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    else
+        if filereadable("script/test")
+            exec ":!script/test " . a:filename
+        elseif filereadable("Gemfile")
+            exec ":!bundle exec rspec --color " . a:filename
+        else
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Md5 COMMAND
+" Show the MD5 of the current buffer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! -range Md5 :echo system('echo '.shellescape(join(getline(<line1>, <line2>), '\n')) . '| md5')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DISABLE SYNTAX
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fucking ruby parsing, sometimes it just is too slow to manage
+" happens when you deal with lots o hashes on one screen. fuck dat!
+map <leader>so :set syntax=off<cr>
