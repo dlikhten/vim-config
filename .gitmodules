@@ -22,13 +22,6 @@
   path = bundle/nerdcommenter
   url = git://github.com/scrooloose/nerdcommenter.git
   ignore = dirty
-[submodule "bundle/command-t"]
-  path = bundle/command-t
-  url = git://git.wincent.com/command-t.git
-  ignore = dirty
-[submodule "bundle/vim-git-pair"]
-  path = bundle/vim-git-pair
-  url = https://github.com/Peeja/vim-git-pair.git
 [submodule "bundle/vim-javascript"]
   path = bundle/vim-javascript
   url = https://github.com/pangloss/vim-javascript.git
@@ -63,3 +56,6 @@
 [submodule "bundle/tabular"]
   path = bundle/tabular
   url = https://github.com/godlygeek/tabular
+[submodule "bundle/ctrlp"]
+  path = bundle/ctrlp
+  url = https://github.com/kien/ctrlp.vim

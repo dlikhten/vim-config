@@ -7,10 +7,6 @@
     cd ~/.vim
     git submodule update --init
     ln -s ~/.vim/vimrc ~/.vimrc
-    # compile command-t
-    cd bundle/command-t/
-    ruby extconf.rb
-    make
 
 
 # Updating

@@ -76,35 +76,6 @@ map <M-D-Up>    :cp<CR>
 map <M-D-Left>  :bp<CR>
 map <M-D-Right> :bn<CR>
 
-"indent/unindent visual mode selection with tab/shift+tab
-vmap <tab> >gv
-vmap <s-tab> <gv
-
-" FuzzyFinder and switchback commands
-map <silent> <leader>b   :FufBuffer<CR>
-
-" refresh the FuzzyFinder cache
-map <leader>rf :FufRenewCache<CR>
-
-" Command-T
-map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-" map <leader>ff  :CommandTFlush<CR>:CommandT<CR>
-" Command-T for rails specific stuff
-" map <leader>fv  :CommandTFlush<CR>:CommandT app/views/<CR>
-" map <leader>fm  :CommandTFlush<CR>:CommandT app/models/<CR>
-" map <leader>fc  :CommandTFlush<CR>:CommandT app/controllers/<CR>
-" map <leader>fh  :CommandTFlush<CR>:CommandT app/helpers/<CR>
-" map <leader>fa  :CommandTFlush<CR>:CommandT app/assets/<CR>
-" map <leader>fl  :CommandTFlush<CR>:CommandT lib/<CR>
-" map <leader>fss  :CommandTFlush<CR>:CommandT spec/<CR>
-" map <leader>fsv  :CommandTFlush<CR>:CommandT spec/views/<CR>
-" map <leader>fsm  :CommandTFlush<CR>:CommandT spec/models/<CR>
-" map <leader>fsc  :CommandTFlush<CR>:CommandT spec/controllers/<CR>
-" map <leader>fsh  :CommandTFlush<CR>:CommandT spec/helpers/<CR>
-" map <leader>fsj  :CommandTFlush<CR>:CommandT spec/javascript/<CR>
-" map <leader>fsa  :CommandTFlush<CR>:CommandT spec/acceptance/<CR>
-" map <leader>fsl  :CommandTFlush<CR>:CommandT spec/lib/<CR>
-
 " ctags with rails load path
 map <leader>rt  :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
 map <leader>T   :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
@@ -169,12 +140,10 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-" map <leader>e :edit %%
-" map <leader>v :view %%
+"indent/unindent visual mode selection with tab/shift+tab
+" vmap <tab> >gv
+" vmap <s-tab> <gv
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
@@ -189,39 +158,6 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
-map <leader>gv :CommandTFlush<cr>:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>:CommandT lib<cr>
-map <leader>gj :CommandTFlush<cr>:CommandT app/assets/javascripts<cr>
-map <leader>gs :CommandTFlush<cr>:CommandT app/assets/stylesheets<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>gt :CommandTFlush<cr>:CommandTTag<cr>
-map <leader>f :CommandTFlush<cr>:CommandT<cr>
-map <leader>F :CommandTFlush<cr>:CommandT %%<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
