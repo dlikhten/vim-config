@@ -43,6 +43,7 @@ map <silent> <leader>gh :CtrlP app/helpers<cr>
 map <silent> <leader>gl :CtrlP lib<cr>
 map <silent> <leader>gj :CtrlP app/assets/javascripts<cr>
 map <silent> <leader>gs :CtrlP app/assets/stylesheets<cr>
+map <silent> <leader>gd :CtrlP db/migrate<cr>
 
 " Think of it as <leader> + (f)ile + <what kind?>
 " <leader> + (f)ile
@@ -54,7 +55,7 @@ map <silent> <leader>fa :CtrlP app<cr>
 map <silent> <leader>fc :CtrlP config<cr>
 map <silent> <leader>fl :CtrlP lib<cr>
 map <silent> <leader>fd :CtrlP %%<cr>
-map <silent> <leader>f  :CtrlP<cr>
+map <silent> <leader>ff :CtrlP<cr>
 
 " reload the cache, you need to do this when if
 " you cannot find a file you know exists (and was recently added/moved)
