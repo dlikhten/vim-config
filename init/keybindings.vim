@@ -43,6 +43,7 @@ nmap <C-l>      <C-w>l
 map <D-<>       :tabedit ~/.vimrc<CR>
 " Open keybindings.vim in a new tab.
 map <D-<>k      :tabedit ~/.vim/init/keybindings.vim<CR>
+map <D-<>n      :tabedit ~/.vim/init/navigation.vim<CR>
 
 " Reload .vimrc
 map <leader>rv  :source ~/.vimrc<CR>
