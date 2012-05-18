@@ -33,7 +33,7 @@ map <silent> <leader>gg :topleft 100 :split Gemfile<cr>
 " parent dir named .git and making it's parent the CWD
 let g:ctrlp_working_path_mode = 2
 
-" Think of it as <leader> + (g)o + <where to?>
+" This is more specific searches, find models, find views, etc.
 " <leader> + (g)o + (v)iews
 " <leader> + (g)o + (c)ontrollers
 map <silent> <leader>gv :CtrlP app/views<cr>
@@ -45,8 +45,9 @@ map <silent> <leader>gj :CtrlP app/assets/javascripts<cr>
 map <silent> <leader>gs :CtrlP app/assets/stylesheets<cr>
 map <silent> <leader>gd :CtrlP db/migrate<cr>
 
-" Think of it as <leader> + (f)ile + <what kind?>
-" <leader> + (f)ile
+" This is more generic searches, find anywhere, find in app/ find in spec/
+" etc.
+" <leader> + (f)ind + (f)ile
 " <leader> + (f)ile + current (d)irectory
 " <leader> + (f)ile + (s)pec
 map <silent> <D-N>      :CtrlP<CR>
