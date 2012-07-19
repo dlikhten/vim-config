@@ -34,7 +34,8 @@ set splitright                  " Add new windows towards the right
 set splitbelow                  " ... and bottom
 set wildmode=list:longest       " Bash-like tab completion
 set scrolloff=3                 " Scroll when the cursor is 3 lines from edge
-set cursorline                  " Highlight current line
+" Don't set cursorline because it causes scrolling to be damn slow!!!
+" set cursorline                  " Highlight current line
 
 " More detailed status line
 set statusline=[%n]\ %f\ %m\ %y
