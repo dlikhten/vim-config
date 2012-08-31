@@ -74,3 +74,5 @@ autocmd BufLeave,FocusLost * silent! wall  " Save anytime we leave a buffer or M
 if has("gui_running")
   set noballooneval
 endif
+
+set nofoldenable                " code folidng sucks
