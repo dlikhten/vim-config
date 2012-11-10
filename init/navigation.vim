@@ -32,6 +32,7 @@ map <silent> <leader>gg :topleft 100 :split Gemfile<cr>
 " CtrlP will manage the local directory by finding the closest
 " parent dir named .git and making it's parent the CWD
 let g:ctrlp_working_path_mode = 2
+let g:ctrlp_user_command = "find %s -type f | egrep -v '/\.(git|hg|svn)|solr|tmp/'"
 
 " This is more specific searches, find models, find views, etc.
 " <leader> + (g)o + (v)iews
