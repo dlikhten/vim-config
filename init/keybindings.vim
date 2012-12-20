@@ -117,14 +117,23 @@ nmap du :diffupdate<CR>
 " Gundo.vim, think of it as leader-undo
 map <leader>u :GundoToggle<CR>
 
-" Fix the smart ticks/quotes
-" basically, good ol' outlook/word/whever editor you use decide to insert
-" smart ticks and quotes. They are quite bad. If you want to use smart
-" quotes, please use html entities and characters supported by the fonts.
-map <leader>'   :%s/[ʼ’‘]/'/g<CR>:%s/[“”]/"/g<CR>
-
 " Disable search highlight on <CR>
 map <CR>      :nohlsearch<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fix Smart Quotes/Dashes with appropriate html entities
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! FixSmartCharacters()
+  exec ":%s/[““]/\\&ldquo;/g"
+  exec ":%s/[””]/\\&rdquo;/g"
+  exec ":%s/[ʼ’]/\\&rsquo;/g"
+  exec ":%s/[‘]/\\&lsquo;/g"
+  exec ":%s/[—]/\\&mdash;/g"
+endfunction
+
+map <leader>'   :call FixSmartCharacters()<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
