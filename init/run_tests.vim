@@ -19,7 +19,7 @@ function! RunFocusedTest()
   let spec_command = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
   let filename = expand("%")
   if filename =~ '_spec\.rb$'
-    call RunTestTool("be ".spec_command." ".expand("%").":".line("."))
+    call RunTestTool("".spec_command." ".expand("%").":".line("."))
   endif
   if filename =~ '\.feature$'
     call RunTestTool("cuke ".expand("%").":".line("."))
@@ -31,7 +31,7 @@ function! RunTests()
   let spec_command = system('if [ x != "x"$(which spec) ] ; then echo -n spec ; elif [ x != "x"$(which rspec) ] ; then echo -n rspec ; fi')
   let filename = expand("%")
   if filename =~ '_spec\.rb$'
-    call RunTestTool("be ".spec_command." ".expand("%"))
+    call RunTestTool("".spec_command." ".expand("%"))
   endif
   if filename =~ '\.feature$'
     call RunTestTool("cuke ".expand("%"))
