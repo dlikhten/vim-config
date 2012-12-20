@@ -1,6 +1,6 @@
 set guifont=Menlo:h14
 set guioptions-=T               " Remove GUI toolbar
-set guioptions-=e               " Use text tab bar, not GUI
+" set guioptions-=e               " Use text tab bar, not GUI
 set guioptions-=rL              " Remove scrollbars
 set visualbell                  " Suppress audio/visual error bell
 set notimeout                   " No command timeout
@@ -75,4 +75,5 @@ if has("gui_running")
   set noballooneval
 endif
 
-set nofoldenable                " code folidng sucks
+set nofoldenable                " code folding sucks
+set spell                       " dima can't spell
