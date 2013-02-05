@@ -8,6 +8,18 @@
     git submodule update --init
     ln -s ~/.vim/vimrc ~/.vimrc
 
+Compile YCM (no c-family support)
+
+    brew install cmake
+
+    cd ~
+    mkdir ycm_build
+    cd ycm_build
+    cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/cpp
+    make ycm_core
+
+
+
 
 # Updating
 
