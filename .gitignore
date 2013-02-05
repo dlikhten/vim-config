@@ -3,3 +3,4 @@ doc/tags
 disabled_bundle
 **/.DS_Store
 .DS_Store
+tmp/
