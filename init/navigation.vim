@@ -29,9 +29,16 @@ map <silent> <leader>gg :topleft 100 :split Gemfile<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL-P BINDINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Exclude files and directories using Vim's wildignore
+set wildignore+=*/.git/objects/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/public/system/*,.idea/*
+
 " CtrlP will manage the local directory by finding the closest
 " parent dir named .git and making it's parent the CWD
+let g:ctrlp_use_caching = 1
+let g:ctrlp_persistent_input = 0
+let g:ctrlp_cache_dir = $HOME . "/.vim/tmp"
 let g:ctrlp_working_path_mode = 2
+let g:ctrlp_clear_cache_on_exit = 0
 
 " This is more specific searches, find models, find views, etc.
 " <leader> + (g)o + (v)iews
