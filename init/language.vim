@@ -1,21 +1,13 @@
 " Whitespace & highlighting & language-specific config
 " ----------------------------------------------------
-
-" Strip trailing whitespace for code files on save
-function! StripTrailingWhitespace()
-  let save_cursor = getpos(".")
-  %s/\s\+$//e
-  call setpos('.', save_cursor)
-endfunction
-
 " C family
-autocmd BufWritePre *.m,*.h,*.c,*.mm,*.cpp,*.hpp call StripTrailingWhitespace()
+autocmd BufWritePre *.m,*.h,*.c,*.mm,*.cpp,*.hpp :FixWhitespace
 
 " Ruby, Rails
-autocmd BufWritePre *.rb,*.yml,*.js,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.feature call StripTrailingWhitespace()
+autocmd BufWritePre *.rb,*.yml,*.js,*.coffee,*.ejs,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.feature :FixWhitespace
 
 " Java, PHP
-autocmd BufWritePre *.java,*.php call StripTrailingWhitespace()
+autocmd BufWritePre *.java,*.php :FixWhitespace
 
 " Highlight Ruby files
 au BufRead,BufNewFile *.thor set filetype=ruby
