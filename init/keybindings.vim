@@ -120,6 +120,8 @@ map <leader>u :GundoToggle<CR>
 " Disable search highlight on <CR>
 map <CR>      :nohlsearch<CR>
 
+" Jump to previous buffer
+map <silent> <leader>e   :CtrlPBuffer<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fix Smart Quotes/Dashes with appropriate html entities
