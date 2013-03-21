@@ -30,47 +30,29 @@ map <silent> <leader>gg :topleft 100 :split Gemfile<cr>
 " CTRL-P BINDINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Exclude files and directories using Vim's wildignore
-set wildignore+=*/.git/objects/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/public/system/*,.idea/*,coverage/*
+set wildignore+=*/.git/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/public/system/*,*/.idea/*,*/coverage/*,.tags*
 
-" CtrlP will manage the local directory by finding the closest
-" parent dir named .git and making it's parent the CWD
-let g:ctrlp_use_caching = 1
+" don't cache, its annoying refreshing all the time
+let g:ctrlp_use_caching = 0
 let g:ctrlp_persistent_input = 0
 let g:ctrlp_cache_dir = $HOME . "/.vim/tmp"
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_clear_cache_on_exit = 1
 
-" This is more specific searches, find models, find views, etc.
-" <leader> + (g)o + (v)iews
-" <leader> + (g)o + (c)ontrollers
-map <silent> <leader>ga :CtrlP app<cr>
-map <silent> <leader>gv :CtrlP app/views<cr>
-map <silent> <leader>gc :CtrlP app/controllers<cr>
-map <silent> <leader>gm :CtrlP app/models<cr>
-map <silent> <leader>gh :CtrlP app/helpers<cr>
-map <silent> <leader>gl :CtrlP lib<cr>
-map <silent> <leader>gj :CtrlP app/assets/javascripts<cr>
-map <silent> <leader>gs :CtrlP app/assets/stylesheets<cr>
-map <silent> <leader>gd :CtrlP db/migrate<cr>
+" instead of constant searching, wait for user input to end
+" 150ms is really good which is pauses in normal typing,
+" shouldn't even notice but less cpu power.
+let g:ctrlp_lazy_update = 150
 
-" This is more generic searches, find anywhere, find in app/ find in spec/
-" etc.
-" <leader> + (f)ind + (f)ile
-" <leader> + (f)ile + current (d)irectory
-" <leader> + (f)ile + (s)pec
-map <silent> <D-N>      :CtrlP<CR>
-map <silent> <leader>fs :CtrlP spec<cr>
-map <silent> <leader>fa :CtrlP app<cr>
-map <silent> <leader>fc :CtrlP config<cr>
-map <silent> <leader>fl :CtrlP lib<cr>
-map <silent> <leader>fd :CtrlP %%<cr>
-map <silent> <leader>ff :CtrlP<cr>
+" show hidden files
+let g:ctrlp_show_hidden = 1
 
-" reload the cache, you need to do this when if
-" you cannot find a file you know exists (and was recently added/moved)
-" I'd do this in the CtrlP work, but that makes CtrlP work too slow so
-" it needs to be independent
-map <silent> <leader>fR :ClearCtrlPCache<cr>
+" working path is the closest ancestor with a .git/.hg repository
+let g:ctrlp_working_path_mode = 'ra'
+
+" Jump to current buffer but only if it's in this window. Otherwise
+" open a new buffer.
+let g:ctrlp_switch_buffer = 'e'
+
+map <silent> <D-N>      :CtrlPRoot<CR>
 
 " <leader> + (b)uffer will invoke CtrlP on the buffer.
 map <silent> <leader>b   :CtrlPBuffer<CR>
