@@ -163,9 +163,9 @@ function! AlternateForCurrentFile()
   let new_file = current_file
   let in_spec = match(current_file, '^spec/') != -1
   let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1 || match(current_file, '\<javascripts\>') != -1 || match(current_file, '\<mailers\>') != -1 || match(current_file, '\<view_models\>') != -1 || match(current_file, '\<queries>\>') != -1
+  let in_lib = match(current_file, '\<lib\>') != -1
   if going_to_spec
-    if in_app
+    if ! in_lib
       let new_file = substitute(new_file, 'app/', '', '')
       let new_file = substitute(new_file, 'assets/', '', '')
     end
@@ -179,7 +179,7 @@ function! AlternateForCurrentFile()
     let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
     let new_file = substitute(new_file, '_spec\.js$', '.js', '')
     let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
+    if ! in_lib
       let new_file = 'app/' . new_file
       let new_file = substitute(new_file, 'javascripts/', 'assets/javascripts/', '')
     end
