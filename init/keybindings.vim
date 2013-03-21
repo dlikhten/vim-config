@@ -127,11 +127,11 @@ map <silent> <leader>e   :CtrlPBuffer<CR><CR>
 " Fix Smart Quotes/Dashes with appropriate html entities
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! FixSmartCharacters()
-  exec ":%s/[““]/\\&ldquo;/g"
-  exec ":%s/[””]/\\&rdquo;/g"
-  exec ":%s/[ʼ’]/\\&rsquo;/g"
-  exec ":%s/[‘]/\\&lsquo;/g"
-  exec ":%s/[—]/\\&mdash;/g"
+  exec ":silent %s/[““]/\\&ldquo;/g"
+  exec ":silent %s/[””]/\\&rdquo;/g"
+  exec ":silent %s/[ʼ’]/\\&rsquo;/g"
+  exec ":silent %s/[‘]/\\&lsquo;/g"
+  exec ":silent %s/[—]/\\&mdash;/g"
 endfunction
 
 map <leader>'   :call FixSmartCharacters()<cr>
