@@ -33,7 +33,7 @@ map <silent> <leader>gg :topleft 100 :split Gemfile<cr>
 set wildignore+=*/.git/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/public/system/*,*/.idea/*,*/coverage/*,.tags*
 
 " don't cache, its annoying refreshing all the time
-let g:ctrlp_use_caching = 0
+let g:ctrlp_use_caching = 1
 let g:ctrlp_persistent_input = 0
 let g:ctrlp_cache_dir = $HOME . "/.vim/tmp"
 
@@ -50,7 +50,7 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " Jump to current buffer but only if it's in this window. Otherwise
 " open a new buffer.
-let g:ctrlp_switch_buffer = 'e'
+let g:ctrlp_switch_buffer = 'E'
 
 map <silent> <D-N>      :CtrlPRoot<CR>
 
