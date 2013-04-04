@@ -92,3 +92,9 @@
 [submodule "bundle/vim-nerdtree-tabs"]
 	path = bundle/vim-nerdtree-tabs
 	url = git://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "bundle/vim-speeddating"]
+	path = bundle/vim-speeddating
+	url = git://github.com/tpope/vim-speeddating.git
+[submodule "bundle/vim-afterimage"]
+	path = bundle/vim-afterimage
+	url = git://github.com/tpope/vim-afterimage.git
