@@ -63,7 +63,7 @@ nnoremap <C-e>  3<C-e>
 nnoremap <C-y>  3<C-y>
 
 " File tree browser
-map \           :NERDTreeToggle<CR>
+map \           :NERDTreeTabsToggle<CR>
 
 " File tree browser showing current file - pipe (shift-backslash)
 map \|          :NERDTreeFind<CR>
