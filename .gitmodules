@@ -98,3 +98,9 @@
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
+[submodule "bundle/vim-endwise"]
+	path = bundle/vim-endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "bundle/jasmine.vim"]
+	path = bundle/jasmine.vim
+	url = https://github.com/claco/jasmine.vim
