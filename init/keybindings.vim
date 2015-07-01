@@ -1,5 +1,10 @@
 " Keybindings
 " -----------
+"
+" ex mode is not useful
+nnoremap Q <nop>
+
+" set a leader
 let mapleader = ","
 let maplocalleader = ";"
 

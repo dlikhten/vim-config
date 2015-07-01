@@ -12,12 +12,12 @@ set wildignore+=*/.git/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/pu
 " don't cache, its annoying refreshing all the time
 let g:ctrlp_use_caching = 1
 let g:ctrlp_persistent_input = 0
-let g:ctrlp_cache_dir = $HOME . "/.vim/tmp"
+let g:ctrlp_cache_dir = "$HOME/.vim/tmp"
 
 " instead of constant searching, wait for user input to end
 " 150ms is really good which is pauses in normal typing,
 " shouldn't even notice but less cpu power.
-let g:ctrlp_lazy_update = 150
+let g:ctrlp_lazy_update = 0
 
 " show hidden files
 let g:ctrlp_show_hidden = 1

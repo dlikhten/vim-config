@@ -2,6 +2,7 @@ set guifont=EnvyCodeR:h16
 set guioptions-=T               " Remove GUI toolbar
 " set guioptions-=e               " Use text tab bar, not GUI
 set guioptions-=rL              " Remove scrollbars
+set guioptions+=R               " Right scrollbar
 set visualbell                  " Suppress audio/visual error bell
 set notimeout                   " No command timeout
 set showcmd                     " Show typed command prefixes while waiting for operator
@@ -23,9 +24,9 @@ set wildignore+=vendor/**          " ...Also vendor.
 
 set list                        " Show whitespace
 if has("gui_running")
-  set listchars=trail:·
+  set listchars=trail:·,tab:·\ 
 else
-  set listchars=trail:~
+  set listchars=trail:~,tab:·\ 
 endif
 
 set showmatch                   " Show matching brackets
@@ -35,7 +36,7 @@ set splitbelow                  " ... and bottom
 set wildmode=list:longest       " Bash-like tab completion
 set scrolloff=3                 " Scroll when the cursor is 3 lines from edge
 " Don't set cursorline because it causes scrolling to be damn slow!!!
-" set cursorline                  " Highlight current line
+set cursorline                  " Highlight current line
 
 " More detailed status line
 set statusline=[%n]\ %f\ %m\ %y
