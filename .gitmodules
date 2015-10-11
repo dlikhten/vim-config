@@ -50,9 +50,6 @@
   path = bundle/vim-ruby
   url = git://github.com/vim-ruby/vim-ruby.git
   ignore = dirty
-[submodule "bundle/gundo"]
-  path = bundle/gundo
-  url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/tabular"]
   path = bundle/tabular
   url = https://github.com/godlygeek/tabular
@@ -101,3 +98,6 @@
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides
+[submodule "bundle/vim-mundo"]
+	path = bundle/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo.git
