@@ -8,6 +8,9 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Exclude files and directories using Vim's wildignore
 set wildignore+=*/.git/*,*/tmp/*,*.png,*.jpg,*.jpeg,*.gif,*/.themes/*,.DS_*,*/public/system/*,*/.idea/*,*/coverage/*,.tags*
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+let g:ctrlp_match_window = 'bottom,order:ttb'
 
 " don't cache, its annoying refreshing all the time
 let g:ctrlp_use_caching = 1
