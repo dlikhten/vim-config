@@ -24,6 +24,14 @@ map <D-D>       "+D
 map <D-p>       "+p
 map <D-P>       "+P
 
+map <leader><leader>y   "+y
+map <leader><leader>Y   "+Y
+map <leader><leader>c   "+c
+map <leader><leader>C   "+C
+map <leader><leader>D   "+D
+map <leader><leader>p   "+p
+map <leader><leader>P   "+P
+
 " Search
 nmap <leader>s  :%s/
 vmap <leader>s  :s/
