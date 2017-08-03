@@ -19,6 +19,11 @@ Compile YCM (no c-family support)
     make ycm_core
 
 
+Configuration
+
+   ln -s <path-to-repo> ~/.vim
+   ln -s <path-to-repo> ~/.config/nvim
+   brew install neovim
 
 
 # Updating
