@@ -21,9 +21,9 @@ Compile YCM (no c-family support)
 
 Configuration
 
-   ln -s <path-to-repo> ~/.vim
-   ln -s <path-to-repo> ~/.config/nvim
-   brew install neovim
+    ln -s <path-to-repo> ~/.vim
+    ln -s <path-to-repo> ~/.config/nvim
+    brew install neovim
 
 
 # Updating
